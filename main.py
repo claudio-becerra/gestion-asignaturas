@@ -1,3 +1,7 @@
+#MODULOS
+from inscripcion_asignaturas import funciones as fn
+from inscripcion_asignaturas import data as d
+from inscripcion_asignaturas import utils as ut
 
 def main():
     #MIENTRAS TRUE
