@@ -1,0 +1,15 @@
+# --- Python ---
+__pycache__/
+*.pyc
+
+# --- Entorno Virtual ---
+venv/
+.venv/
+env/
+
+# --- Configuraciones de VSCode ---
+.vscode/
+
+# --- Sistema Operativo ---
+.DS_Store
+Thumbs.db

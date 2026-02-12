@@ -5,16 +5,21 @@ from inscripcion_asignaturas import utils as ut
 
 def main():
     #MIENTRAS TRUE
+    while True:
         #MOSTRAR MENU
-            #INGRESAR ALUMNO / INSCRIBIR ASIGNATURAS / SALIR
-        
+        ut.mostrar_menu_principal() #INGRESAR ALUMNO / INSCRIBIR ASIGNATURAS / SALIR
         #RECIBIR OPCIÓN DEL USUARIO
+        opcion_principal = input("Ingrese su opción: ")
         #MATCH CON LAS OPCIONES
-
+        match opcion_principal:
         #OPCION 1 - 
-            #INGRESAR ALUMNOS
+            case "1":
+                #INGRESAR ALUMNOS
+                print("Ingrese los datos del alumno a ingresar")
+                
+                #INGRESAR DATOS DEL ALUMNO
+                
 
-            #INGRESAR DATOS DEL ALUMNO
             #NOMBRE - APELLIDO
             #RUT
                 #VALIDAR QUE EL RUT EXISTA
@@ -28,6 +33,8 @@ def main():
 
 
         #OPCION 2 -
+            case "2":
+                pass
             #INSCRIBIR ASIGNATURAS
 
             #RECIBE EL RUT DEL ALUMNO INGRESADO POR EL USUARIO
@@ -104,12 +111,26 @@ def main():
                         #PAUSAR - PRESIONE TECLA ENTER PARA CONTINUAR
                         #LIMPIAMOS PANTALLA
                         #VOLVEMOS A INGRESAR ALUMNO
+        #OPCION 3 -
+            case "3":
+                #MOSTRAR MENSAJE DE CIERRE
+                print("El programa está finalizando...")
+                #PAUSAR
+                ut.pausar()
+                #FINALIZAR PROGRAMA
+                break
+
 
         #OPCION _ -
-            #MENSAJE DE ERROR
-            #PAUSAR
-            #LIMPIAR PANTALLA
-            #VOLVER AL MENU
+            case _:
+                pass
+                #MENSAJE DE ERROR
+                print("Ingrese una opción válida")
+                #PAUSAR
+                ut.pausar()
+                #LIMPIAR PANTALLA
+                ut.limpiar_pantalla()
 
 
-    pass
+if __name__ == "__main__":
+    main()
