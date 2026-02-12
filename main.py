@@ -15,21 +15,14 @@ def main():
         #OPCION 1 - 
             case "1":
                 #INGRESAR ALUMNOS
-                print("Ingrese los datos del alumno a ingresar")
+                fn.ingresar_alumno(d.lista_alumnos)
                 
-                #INGRESAR DATOS DEL ALUMNO
                 
-
-            #NOMBRE - APELLIDO
-            #RUT
-                #VALIDAR QUE EL RUT EXISTA
-                #VALIDAR QUE EL RUT NO SE REPITA EN LA LISTA DE ALUMNOS
-            #AL SER NUEVO ALUMNO, ENTRA EN NIVEL 1 SIN ASIGNATURAS COMPLETADAS NI ASIGNATURAS INSCRITAS
-            
-            #GUARDAR ALUMNO EN LA LISTA
-            #MOSTRAR MENSAJE DE EXITO
-            #LIMPIAR PANTALLA
-            #VOLVER AL MENU
+                #GUARDAR ALUMNO EN LA LISTA
+                #MOSTRAR MENSAJE DE EXITO
+                #LIMPIAR PANTALLA
+                ut.limpiar_pantalla()
+                #VOLVER AL MENU
 
 
         #OPCION 2 -
@@ -111,8 +104,14 @@ def main():
                         #PAUSAR - PRESIONE TECLA ENTER PARA CONTINUAR
                         #LIMPIAMOS PANTALLA
                         #VOLVEMOS A INGRESAR ALUMNO
-        #OPCION 3 -
+        #OPCION 3 - 
             case "3":
+                pass
+
+
+
+        #OPCION 4 -
+            case "4":
                 #MOSTRAR MENSAJE DE CIERRE
                 print("El programa está finalizando...")
                 #PAUSAR

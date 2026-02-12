@@ -27,3 +27,4 @@ lista_asignaturas = {"INF001": {"nombre" : "Fundamentos de las Bases de Datos", 
                     "PROF02" : {"nombre" : "Taller de Integración" , "nivel" : 5}
 }
 
+lista_alumnos = []

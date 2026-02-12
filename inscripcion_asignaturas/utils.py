@@ -10,7 +10,8 @@ Opciones:
 
 1 - Ingresar alumno.
 2 - Inscribir asignaturas.
-3 - Salir
+3 - Eliminar alumno
+4 - Salir
         """)
 
 def pausar():
@@ -22,4 +23,10 @@ def limpiar_pantalla():
         os.system('cls')  #ESCRIBE CLS EN CONSOLA BORRANDO EL CONTENIDO DE ESTA.
     #PARA MAC Y LINUX
     else:  #EN CASO DE NO SER WINDOWS
-        os.system('clear')  #ESCRIBE CLEAR EN CONSOLA BORRANDO EL CONTENIDO DE ESTA.
+        os.system('clear')  #ESCRIBE CLEAR EN CONSOLA BORRANDO EL CONTENIDO
+
+def es_rut_valido(rut):
+    pass
+
+def se_repite(rut, lista):
+    pass
