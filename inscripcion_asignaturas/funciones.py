@@ -3,7 +3,15 @@ from inscripcion_asignaturas import utils as ut
 def ingresar_alumno(alumnos_inscritos): #RECIBE LA LISTA DE ALUMNOS, RETORNE UN DICCIONARIO DEL ALUMNO NUEVO
     print("Ingrese los datos del alumno a ingresar")
     nuevo_alumno ={} #INICIALIZAMOS EL OBJETO QUE UTILIZAREMOS
-    nuevo_alumno["nombre"] = input("Ingrese nombre del alumno: ").upper() #GUARDAMOS EL NOMBRE EN MAYUSCULAS PARA FORMATO
+    while True: #MIENTRAS NO ESTÉ UN NOMBRE VÁLIDO
+        nuevo_alumno["nombre"] = input("Ingrese nombre completo del alumno: ").upper() #GUARDAMOS EL NOMBRE EN MAYUSCULAS PARA FORMATO
+        if nuevo_alumno["nombre"] == "": #SI EL NOMBRE ESTÁ VACIÓ
+            #MENSAJE PARA EL USUARIO - DEBE INGRESAR UN NOMBRE
+            print("Debe ingresar el nombre del alumno")
+            #PAUSAR
+            ut.pausar()
+        else: #SI EL NOMBRE NO ESTÁ VACÍO, CONTINUAR CON LOS DEMÁS DATOS
+            break
     #INGRESAR RUT
     while True: #QUE INGRESE RUT HASTA QUE SALGAMOS DEL CICLO
         print("En caso de querer cancelar la operación, presionar enter sin ingresar datos")
@@ -12,6 +20,7 @@ def ingresar_alumno(alumnos_inscritos): #RECIBE LA LISTA DE ALUMNOS, RETORNE UN 
         if rut == "": #SI DEJA EL CAMPO VACIO, CANCELAR OPERACION
             #MOSTRAR MENSAJE A USUARIO DE CANCELACIÓN
             print("El proceso ha sido cancelado\n Volviendo al menu")
+            ut.pausar()
             return
         #validamos rut
         if ut.es_rut_valido(rut): #SI SE INGRESA UN RUT VALIDO
@@ -26,6 +35,12 @@ def ingresar_alumno(alumnos_inscritos): #RECIBE LA LISTA DE ALUMNOS, RETORNE UN 
         else: #SI EL RUT NO ES VALIDO
             #MENSAJE AL USUARIO - EL RUT ES INVALIDO
             print("El rut ingresado no es válido")
+            print("Volviendo a ingresar el rut...")
+            #PAUSAR
+            ut.pausar()
+            #LIMPIAR PANTALLA
+            ut.limpiar_pantalla()
+
             #VOLVEMOS A INGRESAR RUT
             continue
 

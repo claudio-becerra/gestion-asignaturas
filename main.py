@@ -7,25 +7,21 @@ def main():
     #MIENTRAS TRUE
     while True:
         #MOSTRAR MENU
-        ut.mostrar_menu_principal() #INGRESAR ALUMNO / INSCRIBIR ASIGNATURAS / SALIR
+        ut.mostrar_menu_principal() #INGRESAR ALUMNO / INSCRIBIR ASIGNATURAS / ELIMINAR ALUMNO / SALIR
         #RECIBIR OPCIÓN DEL USUARIO
         opcion_principal = input("Ingrese su opción: ")
         #MATCH CON LAS OPCIONES
         match opcion_principal:
-        #OPCION 1 - 
+        #OPCION 1 - INGRESAR ALUMNO
             case "1":
                 #INGRESAR ALUMNOS
                 fn.ingresar_alumno(d.lista_alumnos)
-                
-                
-                #GUARDAR ALUMNO EN LA LISTA
-                #MOSTRAR MENSAJE DE EXITO
                 #LIMPIAR PANTALLA
                 ut.limpiar_pantalla()
                 #VOLVER AL MENU
 
 
-        #OPCION 2 -
+        #OPCION 2 - INSCRIBIR ASIGNATURAS
             case "2":
                 pass
             #INSCRIBIR ASIGNATURAS
@@ -104,13 +100,36 @@ def main():
                         #PAUSAR - PRESIONE TECLA ENTER PARA CONTINUAR
                         #LIMPIAMOS PANTALLA
                         #VOLVEMOS A INGRESAR ALUMNO
-        #OPCION 3 - 
+        #OPCION 3 - ELIMINAR ALUMNO
             case "3":
+                #SI HAY ALUMNOS INSCRITOS
+                    #PEDIR RUT DEL ALUMNO
+
+                    #RECORRER LA LISTA PARA ENCONTRAR EL ALUMNO CON ESE RUT
+                        #SI SE ENCUENTRA 
+                            #CONFIRMAR SI SE QUIERE ELIMINAR
+                                #SI SE QUIERE ELIMINAR
+                                    #SE ELIMINA EL ALUMNO DE LA LISTA
+                                    #MENSAJE AL USUARIO - ALUMNO ELIMINADO
+                                    #BREAK
+                                #SI NO SE QUIERE ELIMINAR
+                                    #MENSAJE AL USUARIO - EL ALUMNO NO SE ELIMINÓ
+                                    #PAUSAR
+                                    #BREAK
+                        #SI NO SE ENCUENTRA
+                            #MENSAJE AL USUARIO - ALUMNO NO ENCONTRADO
+                            #MENSAJE AL USUARIO - VOLVIENDO A MENU PRINCIPAL
+                            #PAUSAR
+                            #BREAK
+                #SI NO HAY ALUMNOS INSCRITOS
+                    #MENSAJE AL USUARIO - NO HAY ALUMNOS INSCRITOS
+                    #PAUSAR
+                    #BREAK
                 pass
 
 
 
-        #OPCION 4 -
+        #OPCION 4 - SALIR
             case "4":
                 #MOSTRAR MENSAJE DE CIERRE
                 print("El programa está finalizando...")
@@ -120,7 +139,7 @@ def main():
                 break
 
 
-        #OPCION _ -
+        #OPCION _ - OPCIÓN ERRONEA
             case _:
                 pass
                 #MENSAJE DE ERROR

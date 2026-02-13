@@ -30,3 +30,6 @@ def es_rut_valido(rut):
 
 def se_repite(rut, lista):
     pass
+
+def confirmar():
+    pass
