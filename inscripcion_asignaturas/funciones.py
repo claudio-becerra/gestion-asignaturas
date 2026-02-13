@@ -54,3 +54,4 @@ def ingresar_alumno(alumnos_inscritos): #RECIBE LA LISTA DE ALUMNOS, RETORNE UN 
     print(f"Nombre: {nuevo_alumno["nombre"]} - rut: {nuevo_alumno["rut"]}")
 
 
+print(es_rut_valido("18.697.026-8"))
