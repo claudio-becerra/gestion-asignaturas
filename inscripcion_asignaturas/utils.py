@@ -87,9 +87,25 @@ def es_rut_valido(rut): #RECIBE UNA CADENA (RUT) Y RETORNA TRUE OR FALSE
     else:
         return False
 
-
-def se_repite(rut, lista):
-    pass
+def se_repite(rut, lista): #RECIBE EL RUT Y LA LISTA DE ALUMNOS 
+    #RECORREMOS LA LISTA
+    #PARA CADA ALUMNO EN LA LISTA
+    for alumno in lista:
+        #SI RUT == ALUMNO["RUT"] - SI ALGUN ALUMNO TIENE EL MISMO RUT QUE SE INGRESÓ
+        if rut == alumno["rut"]:
+            return True
+    #SI TERMINA LA LISTA SIN ENCONTRAR UNA COINCIDENCIA
+    return False
 
 def confirmar():
-    pass
+    while True: 
+        respuesta = input("¿Confirma su selección? S/N: ").upper()
+        if respuesta == "S": #SI CONFIRMA
+            return True #RETORNA TRUE
+        elif respuesta == "N": #SI NO CONFIRMA
+            return False #RETORNA FALSE
+        else: #EN CASO DE OBTENER OTRA RESPUESTA
+            #MENSAJE DE ERROR AL USUARIO
+            print("Escriba S para confirmar, N para cancelar")  
+            #VOLVEMOS AL CICLO DE LA OPCIÓN
+        
