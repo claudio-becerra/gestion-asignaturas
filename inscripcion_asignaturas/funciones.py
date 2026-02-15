@@ -1,5 +1,7 @@
 from inscripcion_asignaturas import utils as ut
 
+alumno_actual = {}
+
 def ingresar_alumno(alumnos_inscritos): #RECIBE LA LISTA DE ALUMNOS, RETORNE UN DICCIONARIO DEL ALUMNO NUEVO
     print("Ingrese los datos del alumno a ingresar")
     nuevo_alumno ={} #INICIALIZAMOS EL OBJETO QUE UTILIZAREMOS
@@ -17,15 +19,15 @@ def ingresar_alumno(alumnos_inscritos): #RECIBE LA LISTA DE ALUMNOS, RETORNE UN 
         print("En caso de querer cancelar la operación, presionar enter sin ingresar datos")
         rut =input("Ingrese el rut del alumno: ")
         #SI DEJÓ EL INPUT VACIO
-        if rut == "": #SI DEJA EL CAMPO VACIO, CANCELAR OPERACION
+        if ut.es_vacio(rut): #SI DEJA EL CAMPO VACIO, CANCELAR OPERACION
             #MOSTRAR MENSAJE A USUARIO DE CANCELACIÓN
             print("El proceso ha sido cancelado\n Volviendo al menu")
             ut.pausar()
             return
         #validamos rut
         if ut.es_rut_valido(rut): #SI SE INGRESA UN RUT VALIDO
-            if not ut.se_repite(rut, alumnos_inscritos): #SI NO SE REPITE EN LA LISTA
-                nuevo_alumno["rut"] = rut
+            if not ut.se_encuentra_en_lista(rut, alumnos_inscritos): #SI NO SE REPITE EN LA LISTA
+                nuevo_alumno["rut"] = ut.formato_rut(rut)
                 break
 
             else: #SI SE REPITE
@@ -45,13 +47,155 @@ def ingresar_alumno(alumnos_inscritos): #RECIBE LA LISTA DE ALUMNOS, RETORNE UN 
             continue
 
     nuevo_alumno["nivel"] = 1 #AL SER NUEVO ALUMNO, EL NIVEL BASE ES 1
-    nuevo_alumno["asignaturas-inscritas"] =[]
+    nuevo_alumno["asignaturas_inscritas"] =[]
 
     #GUARDAR ALUMNO EN LA LISTA
-    alumnos_inscritos.append()
+    alumnos_inscritos.append(nuevo_alumno)
     #MENSAJE AL USUARIO - ALUMNO INSCRITO
     print("El alumno fue inscrito de forma exitosa")
     print(f"Nombre: {nuevo_alumno["nombre"]} - rut: {nuevo_alumno["rut"]}")
 
+def inscribir_asignatura(alumnos_inscritos, lista_asignaturas, alumno_Actual):
+    while True:
+        #MOSTRAR LISTA ASIGNATURAS DEL NIVEL DEL ALUMNO
+        ut.mostrar_asignaturas(alumno_actual["nivel"]) #MUESTRA LA LISTA DE ASIGNATURAS DEPENDIENDO DEL NIVEL
+        #MENSAJE DEL USUARIO PARA QUE INGRESE EL CODIGO DE LA ASIGNATURA
+        codigo_inscripcion = input("Ingrese el código de la asignatura a inscribir: ")
 
-print(es_rut_valido("18.697.026-8"))
+        #VALIDAR QUE SEA UNA DE LAS ASIGNATURAS MOSTRADAS
+        #SI SE ENCUENTRA EN LAS ASIGNATURAS MOSTRADAS EN EL MENU
+        if ut.se_encuentra_asignatura(codigo_inscripcion, lista_asignaturas):
+
+            #SI LA ASIGNATURA NO SE ENCUENTRA EN SUS ASIGNATURAS INSCRITAS
+            if not ut.se_encuentra_inscrita(codigo_inscripcion, alumno_actual["asignaturas_inscritas"]):
+
+                #SI TIENE MENOS DE 6 ASIGNATURAS INSCRITAS
+                if len(alumno_actual["asignaturas_inscritas"]) < 6:
+                    #PEDIR CONFIRMACIÓN AL USUARIO S/N
+                    #SI CONFIRMA SU SELECCIÓN
+                    if ut.confirmar():
+                        #DATOS DE LA ASIGNATURA
+                        asignatura = lista_asignaturas[codigo_inscripcion]
+                        #AGREGAMOS LA ASIGNATURA A LAS ASIGNATURAS INSCRITAS
+                        nueva_inscripcion ={"codigo" : codigo_inscripcion,
+                                            "nombre" : asignatura["nombre"],
+                                            "nivel" : asignatura["nivel"]}
+                        alumno_actual["asignaturas_inscritas"].append(nueva_inscripcion)
+                        #MENSAJE DE EXITO - ASIGNATURA INSCRITA
+                        print(f"Se ha inscrito la asignatura {nueva_inscripcion["codigo"]} : {nueva_inscripcion["nombre"]} ")
+                        #PAUSAR
+                        ut.pausar()
+                        #LIMPIAR PANTALLA
+                        ut.limpiar_pantalla()
+                        continue #VOLVEMOS A INSCRIBIR OTRA ASIGNATURA
+
+                    #SI NO LA CONFIRMA
+                    else:
+                        #MENSAJE DE ERROR - NO SE HA INCRITO LA ASIGNATURA
+                        print("La asignatura no se ha inscrito")
+                        #PAUSAR
+                        ut.pausar()
+                        continue #VOLVEMOS A INSCRIBIR ASIGNATURA
+
+                #SI SE ENCUENTRA EN LA LISTA DE ASIGNATURAS INSCRITAS
+                else:
+                    #MENSAJE ERROR - ASIGNATURA YA SE ENCUENTRA INSCRITA
+                    print("La asignatura seleccionada ya se encuentra inscrita")
+                    ut.pausar()
+                    ut.limpiar_pantalla()
+
+
+            #SI NO TIENE MENOS DE 6 ASIGNATURAS INSCRITAS
+            else:
+                #MENSAJE ERROR - TOPE DE ASIGNATURAS ALCANZADO
+                print("Has superado el límite de asignaturas por inscribir")
+                ut.pausar()
+                ut.limpiar_pantalla()
+        
+        #SI NO SE ENCUENTRA ENTRE LAS ASIGNATURAS
+        else:
+            #MENSAJE ERROR - NO SE ENCUENTRAN LA ASIGNATURA
+            print("La asignatura ingresada no existe, intente de nuevo")
+            ut.pausar()
+            ut.limpiar_pantalla()
+
+def menu_asignaturas(alumnos_inscritos, lista_asignaturas):
+    #INGRESAR RUT
+    while True: #QUE INGRESE RUT HASTA QUE SALGAMOS DEL CICLO
+        print("En caso de querer cancelar la operación, presionar enter sin ingresar datos")
+        rut =input("Ingrese el rut del alumno: ")
+        #SI DEJÓ EL INPUT VACIO
+        if ut.es_vacio(rut): #SI DEJA EL CAMPO VACIO, CANCELAR OPERACION
+            #MOSTRAR MENSAJE A USUARIO DE CANCELACIÓN
+            print("El proceso ha sido cancelado\n Volviendo al menu")
+            ut.pausar()
+            return
+        #validamos rut
+        if ut.es_rut_valido(rut): #SI SE INGRESA UN RUT VALIDO
+            #VER SI SE ENCUENTRA EN LA LISTA DE ALUMNOS
+            if ut.se_encuentra_en_lista(rut, alumnos_inscritos):
+                rut_alumno_actual = ut.formato_rut(rut)
+                alumno_actual = ut.buscar_alumno(rut_alumno_actual, alumnos_inscritos)
+
+                while True: #MOSTRAMOS EL MENU DE INSCRIPCION
+                    #INSCRIBIR ASIGNATURA- ELIMINAR ASIGNATURA - VOLVER A MENU PRINCIPAL
+                    ut.mostrar_menu_inscripcion()
+
+                    #MATCH CON LAS OPCIONES
+                    opcion = input("Ingrese la opción que necesite: ")
+                    match opcion:
+                        #OPCION 1 - INSCRIBIR ASIGNATURA
+                        case "1":
+                            inscribir_asignatura(alumnos_inscritos, lista_asignaturas, alumno_actual)
+
+                    #OPCION 2 - ELIMINAR ASIGNATURA
+                        case "2":
+                            pass
+                        #SI HAY ASIGNATURAS INSCRITAS
+                            #MIENTRAS TRUE
+                                #MOSTRAS LISTA DE ASIGNATURAS INSCRITAS
+                                    #CODIGO - NOMBRE - NIVEL
+                                #MENSAJE AL USUARIO PARA QUE INGRESE EL CODIGO DE LA ASIGNATURA A ELIMINAR
+                                #RECIBIR NUMERO DE LA ASIGNATURA A ELIMINAR
+                                    #VALIDAR QUE SEA UNA DE LAS ASIGNATURAS MOSTRADAS (INSCRITAS)
+                                    #ELIMINAR ASIGNATURA DE ASIGNATURAS INSCRITAS
+                                    #MENSAJE AL USUARIO ASIGNATURA ELIMINADA
+                                    #PAUSAR
+                                    #LIMPIAR PANTALLA
+                                    #VOLVER A ELIMINAR ASIGNATURAS (BREAK)
+                                    
+
+                        #SI NO HAY ASIGNATURAS INSCRITAS
+                            #MENSAJE AL USUARIO NO HAY ASIGNATURAS INSCRITAS
+                            #PAUSAR
+                            #LIMPIAR PANTALLA
+                            #VOLVER A MENU DE INSCRIPCION
+
+
+                    #OPCION 3 - VOLVER AL MENU PRINCIPAL
+                        case "3":
+                        #VOLVER AL MENU PRINCIPAL
+
+                    #OPCION _ -
+                        #MENSAJE DE ERROR
+                        #PAUSAR
+                        #LIMPIAR PANTALLA
+                            pass
+            
+            else: #SI NO SE ENCUENTRA EN LA LISTA DE ALUMNOS INSCRITOS
+                #MENSAJE ERROR AL USUARIO - ALUMNO NO INSCRITO
+                print("El rut ingresado no está inscrito")
+                print("Volviendo a ingresar el rut...")
+                #PAUSAR
+                ut.pausar()
+                
+        else: #SI EL RUT NO ES VALIDO
+            #MENSAJE AL USUARIO - EL RUT ES INVALIDO
+            print("El rut ingresado no es válido")
+            print("Volviendo a ingresar el rut...")
+            #PAUSAR
+            ut.pausar()
+            #LIMPIAR PANTALLA
+            ut.limpiar_pantalla()
+
+

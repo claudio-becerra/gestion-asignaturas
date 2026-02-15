@@ -27,7 +27,7 @@ def limpiar_pantalla():
 
 def es_rut_valido(rut): #RECIBE UNA CADENA (RUT) Y RETORNA TRUE OR FALSE
     #DAMOS EL FORMATO AL RUT - 12345678K
-    rut = rut.replace('.', "").replace('-', "") #PRIMERO QUITAMOS LOS '.' Y LUEGO EL '-'
+    rut = formato_rut(rut)
 
     #SI TIENE UN LARGO MINIMO DE 7 CARACTERES (LO MÁS PEQUEÑO QUE SE PUEDE CONSEGUIR DE UNA PERSONA VIVA EN LA ACTUALIDAD)
     if len(rut) > 7:
@@ -87,7 +87,11 @@ def es_rut_valido(rut): #RECIBE UNA CADENA (RUT) Y RETORNA TRUE OR FALSE
     else:
         return False
 
-def se_repite(rut, lista): #RECIBE EL RUT Y LA LISTA DE ALUMNOS 
+def formato_rut(rut):
+    rut = rut.replace('.', "").replace('-', "") #PRIMERO QUITAMOS LOS '.' Y LUEGO EL '-'
+    return rut
+
+def se_encuentra_en_lista(rut, lista): #RECIBE EL RUT Y LA LISTA DE ALUMNOS 
     #RECORREMOS LA LISTA
     #PARA CADA ALUMNO EN LA LISTA
     for alumno in lista:
@@ -109,3 +113,34 @@ def confirmar():
             print("Escriba S para confirmar, N para cancelar")  
             #VOLVEMOS AL CICLO DE LA OPCIÓN
         
+def es_vacio(entrada): #RECIBE UN RUT Y RETORNA TRUE OR FALSE
+        if entrada == "": #SI DEJA EL CAMPO VACIO, CANCELAR OPERACION
+            return True 
+        else: #SI NO ESTÁ VACÍO
+            return False 
+
+
+def mostrar_menu_inscripcion(): 
+    print("""
+Bienvenido al menú de inscrición de asignaturas.
+----------------------------------------------------
+Opciones:
+
+1 - Inscribir asignatura.
+2 - Eliminar asignatura.
+3 - Volver al menú principal
+        """)
+
+def mostrar_asignaturas(nivel):
+    #MOSTRAR ASIGNATURAS DE UN NIVEL ANTERIOR QUE NO APAREZCA EN LISTA ASIGNATURAS COMPLETADAS
+    #CODIGO - NOMBRE - NIVEL
+    pass
+
+def se_encuentra_asignatura(codigo, lista_asignaturas):
+    pass
+
+def buscar_alumno(alumno, lista_alumnos):
+    pass
+
+def se_encuentra_inscrita(codigo, asignaturas_inscritas):
+    pass
