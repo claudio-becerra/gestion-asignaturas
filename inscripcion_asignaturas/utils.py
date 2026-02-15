@@ -131,19 +131,37 @@ Opciones:
 3 - Volver al menú principal
         """)
 
-def mostrar_asignaturas(nivel):
+def mostrar_asignaturas(nivel_alumno, asignaturas): #RECIBE EL NIVEL Y LA LISTA DE ASIGNATURAS
     #MOSTRAR ASIGNATURAS DE UN NIVEL ANTERIOR QUE NO APAREZCA EN LISTA ASIGNATURAS COMPLETADAS
     #CODIGO - NOMBRE - NIVEL
+    print("Asignaturas a inscribir")
+    for codigo, asignatura in asignaturas.items():
+        if int(nivel_alumno) >= int(asignatura["nivel"]):
+            print(f"{codigo} : {asignatura["nombre"]}")
+
+def se_encuentra_asignatura(codigo_ingresado, asignaturas, nivel_alumno): #RECIBE EL CODIGO DE ASIGNATURA. LISTA ASIGNATURAS Y RETORNA TRUE O FALSE
+    for codigo, asignatura in asignaturas.items():
+        
+        if int(nivel_alumno) >= int(asignatura["nivel"]): 
+            #SI SE ENCUENTRA LA ASIGNATURA
+            if codigo_ingresado.upper() == codigo:
+                return True
+        #SI NO SE ENCUENTRA
+        else:
+            return False
     pass
 
-def se_encuentra_asignatura(codigo, lista_asignaturas):
-    pass
+def buscar_alumno(rut_alumno, lista_alumnos): #RECIBE EL RUT DEL ALUMNO, LA LISTA DE ALUMNOS Y DICCIONARIO ALUMNO
+    for alumno in lista_alumnos:
+        if alumno["rut"] == rut_alumno:
+            return alumno
 
-def buscar_alumno(alumno, lista_alumnos):
-    pass
+def se_encuentra_inscrita(codigo, asignaturas_inscritas): #RECIBE EL CODIGO, LA LISTA DE ASIGNATURAS Y RETORNA TRUE OR FALSE
+    for asignatura in asignaturas_inscritas:
+        if codigo == asignatura["codigo"]:
+            return True
+    return False
 
-def se_encuentra_inscrita(codigo, asignaturas_inscritas):
-    pass
 
 def mostrar_asignaturas_inscritas(alumno): #RECIBE AL ALUMNO E IMPRIME LA LISTA DE SUS ASIGNATURAS
     #MENSAJE INDICANDO QUE SE MOSTRARÁN SUS ASIGNATURAS INSCRITAS

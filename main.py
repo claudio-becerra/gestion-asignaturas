@@ -28,33 +28,7 @@ def main():
 
         #OPCION 3 - ELIMINAR ALUMNO
             case "3":
-                fn.eliminar_alumno()
-                #SI HAY ALUMNOS INSCRITOS
-                    #PEDIR RUT DEL ALUMNO
-
-                    #RECORRER LA LISTA PARA ENCONTRAR EL ALUMNO CON ESE RUT
-                        #SI SE ENCUENTRA 
-                            #CONFIRMAR SI SE QUIERE ELIMINAR
-                                #SI SE QUIERE ELIMINAR
-                                    #SE ELIMINA EL ALUMNO DE LA LISTA
-                                    #MENSAJE AL USUARIO - ALUMNO ELIMINADO
-                                    #BREAK
-                                #SI NO SE QUIERE ELIMINAR
-                                    #MENSAJE AL USUARIO - EL ALUMNO NO SE ELIMINÓ
-                                    #PAUSAR
-                                    #BREAK
-                        #SI NO SE ENCUENTRA
-                            #MENSAJE AL USUARIO - ALUMNO NO ENCONTRADO
-                            #MENSAJE AL USUARIO - VOLVIENDO A MENU PRINCIPAL
-                            #PAUSAR
-                            #BREAK
-                #SI NO HAY ALUMNOS INSCRITOS
-                    #MENSAJE AL USUARIO - NO HAY ALUMNOS INSCRITOS
-                    #PAUSAR
-                    #BREAK
-                pass
-
-
+                fn.eliminar_alumno(d.lista_alumnos)
 
         #OPCION 4 - SALIR
             case "4":

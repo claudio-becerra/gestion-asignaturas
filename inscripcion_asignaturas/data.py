@@ -27,4 +27,4 @@ lista_asignaturas = {"INF001": {"nombre" : "Fundamentos de las Bases de Datos", 
                     "PROF02" : {"nombre" : "Taller de Integración" , "nivel" : 5}
 }
 
-lista_alumnos = []
+lista_alumnos = [{"nombre" : "Claudio Becerra", "rut" : "186970268", "nivel" : 3, "asignaturas_inscritas" : []}, {"nombre" : "Javier Mancilla", "rut" : "111111111", "nivel" : 2, "asignaturas_inscritas" : []}]
