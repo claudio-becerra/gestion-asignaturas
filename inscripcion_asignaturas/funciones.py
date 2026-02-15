@@ -119,6 +119,40 @@ def inscribir_asignatura(alumnos_inscritos, lista_asignaturas, alumno_Actual):
             ut.pausar()
             ut.limpiar_pantalla()
 
+def eliminar_asignatura(alumno_actual):
+    #SI HAY ASIGNATURAS INSCRITAS - NO ESTÁ VACIO
+    if alumno_actual["asignaturas_inscritas"] != []:
+        #MIENTRAS TRUE
+        while True:
+            #MOSTRAS LISTA DE ASIGNATURAS INSCRITAS
+            ut.mostrar_asignaturas_inscritas(alumno_actual)
+            #MENSAJE AL USUARIO PARA QUE INGRESE EL CODIGO DE LA ASIGNATURA A ELIMINAR
+            asignatura = input("Ingrese el código de la asignatura a eliminar").upper()
+            #SI LA ASIGNATURA SE ENCUENTRA INSCRITA
+            if ut.se_encuentra_inscrita(alumno_actual, alumno_actual["asignaturas_inscritas"]):
+                #ELIMINAR ASIGNATURA DE ASIGNATURAS INSCRITAS
+                alumno_actual["asignaturas_inscritas"].pop(asignatura)
+                #MENSAJE AL USUARIO ASIGNATURA ELIMINADA
+                print("La asignatura ha sido eliminada")
+                #PAUSAR
+                ut.pausar()
+                #LIMPIAR PANTALLA
+                ut.limpiar_pantalla()
+                #VOLVER A ELIMINAR ASIGNATURAS (BREAK)
+                break
+                
+
+    #SI NO HAY ASIGNATURAS INSCRITAS
+    else:
+        #MENSAJE AL USUARIO NO HAY ASIGNATURAS INSCRITAS
+        print("El alumno no posee asignaturas inscritas")
+        #PAUSAR
+        ut.pausar()
+        #LIMPIAR PANTALLA
+        ut.limpiar_pantalla()
+        #VOLVER A MENU DE INSCRIPCION
+
+
 def menu_asignaturas(alumnos_inscritos, lista_asignaturas):
     #INGRESAR RUT
     while True: #QUE INGRESE RUT HASTA QUE SALGAMOS DEL CICLO
@@ -150,37 +184,21 @@ def menu_asignaturas(alumnos_inscritos, lista_asignaturas):
 
                     #OPCION 2 - ELIMINAR ASIGNATURA
                         case "2":
-                            pass
-                        #SI HAY ASIGNATURAS INSCRITAS
-                            #MIENTRAS TRUE
-                                #MOSTRAS LISTA DE ASIGNATURAS INSCRITAS
-                                    #CODIGO - NOMBRE - NIVEL
-                                #MENSAJE AL USUARIO PARA QUE INGRESE EL CODIGO DE LA ASIGNATURA A ELIMINAR
-                                #RECIBIR NUMERO DE LA ASIGNATURA A ELIMINAR
-                                    #VALIDAR QUE SEA UNA DE LAS ASIGNATURAS MOSTRADAS (INSCRITAS)
-                                    #ELIMINAR ASIGNATURA DE ASIGNATURAS INSCRITAS
-                                    #MENSAJE AL USUARIO ASIGNATURA ELIMINADA
-                                    #PAUSAR
-                                    #LIMPIAR PANTALLA
-                                    #VOLVER A ELIMINAR ASIGNATURAS (BREAK)
-                                    
-
-                        #SI NO HAY ASIGNATURAS INSCRITAS
-                            #MENSAJE AL USUARIO NO HAY ASIGNATURAS INSCRITAS
-                            #PAUSAR
-                            #LIMPIAR PANTALLA
-                            #VOLVER A MENU DE INSCRIPCION
-
+                            eliminar_asignatura(alumno_actual)
 
                     #OPCION 3 - VOLVER AL MENU PRINCIPAL
                         case "3":
                         #VOLVER AL MENU PRINCIPAL
+                            break
 
-                    #OPCION _ -
-                        #MENSAJE DE ERROR
-                        #PAUSAR
-                        #LIMPIAR PANTALLA
-                            pass
+                    #OPCION _ - ERROR
+                        case _:
+                            #MENSAJE DE ERROR
+                            print("Debe ingresar una opción válida")
+                            #PAUSAR
+                            ut.pausar()
+                            #LIMPIAR PANTALLA
+                            ut.limpiar_pantalla()
             
             else: #SI NO SE ENCUENTRA EN LA LISTA DE ALUMNOS INSCRITOS
                 #MENSAJE ERROR AL USUARIO - ALUMNO NO INSCRITO

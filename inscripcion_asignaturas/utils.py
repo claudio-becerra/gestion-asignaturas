@@ -144,3 +144,11 @@ def buscar_alumno(alumno, lista_alumnos):
 
 def se_encuentra_inscrita(codigo, asignaturas_inscritas):
     pass
+
+def mostrar_asignaturas_inscritas(alumno): #RECIBE AL ALUMNO E IMPRIME LA LISTA DE SUS ASIGNATURAS
+    #MENSAJE INDICANDO QUE SE MOSTRARÁN SUS ASIGNATURAS INSCRITAS
+    print("Estas son las asignaturas inscritas del alumno")
+    #alumno["asignaturas_inscritas"] - LISTA DE ASIGNATURAS INSCRITAS
+    for asignatura in alumno["asignaturas_inscritas"]:
+        #MOSTRAR ASIGNATURA
+        print(f"{asignatura["codigo"]} : {asignatura["nombre"]}")

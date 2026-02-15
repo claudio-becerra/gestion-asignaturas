@@ -28,6 +28,7 @@ def main():
 
         #OPCION 3 - ELIMINAR ALUMNO
             case "3":
+                fn.eliminar_alumno()
                 #SI HAY ALUMNOS INSCRITOS
                     #PEDIR RUT DEL ALUMNO
 
