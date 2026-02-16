@@ -30,7 +30,6 @@ def ingresar_alumno(alumnos_inscritos): #RECIBE LA LISTA DE ALUMNOS, RETORNE UN 
             if not ut.se_encuentra_en_lista(ut.formato_rut(rut), alumnos_inscritos): #SI NO SE REPITE EN LA LISTA
 
                 nuevo_alumno["rut"] = ut.formato_rut(rut)
-                ut.pausar()
                 break
 
             else: #SI SE REPITE
@@ -108,18 +107,20 @@ def inscribir_asignatura(lista_asignaturas, alumno_actual):
                         ut.pausar()
                         continue #VOLVEMOS A INSCRIBIR ASIGNATURA
 
-                #SI SE ENCUENTRA EN LA LISTA DE ASIGNATURAS INSCRITAS
+
+
+
+                #SI NO TIENE MENOS DE 6 ASIGNATURAS INSCRITAS
                 else:
-                    #MENSAJE ERROR - ASIGNATURA YA SE ENCUENTRA INSCRITA
-                    print("La asignatura seleccionada ya se encuentra inscrita")
+                    #MENSAJE ERROR - TOPE DE ASIGNATURAS ALCANZADO
+                    print("Has superado el límite de asignaturas por inscribir")
                     ut.pausar()
                     ut.limpiar_pantalla()
 
-
-            #SI NO TIENE MENOS DE 6 ASIGNATURAS INSCRITAS
+            #SI SE ENCUENTRA EN LA LISTA DE ASIGNATURAS INSCRITAS
             else:
-                #MENSAJE ERROR - TOPE DE ASIGNATURAS ALCANZADO
-                print("Has superado el límite de asignaturas por inscribir")
+                #MENSAJE ERROR - ASIGNATURA YA SE ENCUENTRA INSCRITA
+                print("La asignatura seleccionada ya se encuentra inscrita")
                 ut.pausar()
                 ut.limpiar_pantalla()
         
@@ -138,20 +139,33 @@ def eliminar_asignatura(alumno_actual):
             #MOSTRAS LISTA DE ASIGNATURAS INSCRITAS
             ut.mostrar_asignaturas_inscritas(alumno_actual)
             #MENSAJE AL USUARIO PARA QUE INGRESE EL CODIGO DE LA ASIGNATURA A ELIMINAR
-            asignatura = input("Ingrese el código de la asignatura a eliminar").upper()
+            print("Si desea salir del menu, solo presione enter")
+            asignatura = input("\nIngrese el código de la asignatura a eliminar: ").upper()
+
+            #SI EL CAMPO ESTA VACIO, SALIR DEL MENU
+            if ut.es_vacio(asignatura):
+                print("Volviendo al menu")
+                ut.pausar()
+                ut.limpiar_pantalla()
+                break
             #SI LA ASIGNATURA SE ENCUENTRA INSCRITA
-            if ut.se_encuentra_inscrita(alumno_actual, alumno_actual["asignaturas_inscritas"]):
+            if ut.se_encuentra_inscrita(asignatura, alumno_actual["asignaturas_inscritas"]):
+                #Buscar index de la asignatura en la lista
+                index_eliminar = ut.buscar_index(asignatura, alumno_actual["asignaturas_inscritas"])
+
                 #ELIMINAR ASIGNATURA DE ASIGNATURAS INSCRITAS
-                alumno_actual["asignaturas_inscritas"].pop(asignatura)
+                alumno_actual["asignaturas_inscritas"].pop(index_eliminar)
                 #MENSAJE AL USUARIO ASIGNATURA ELIMINADA
                 print("La asignatura ha sido eliminada")
                 #PAUSAR
                 ut.pausar()
                 #LIMPIAR PANTALLA
                 ut.limpiar_pantalla()
-                #VOLVER A ELIMINAR ASIGNATURAS (BREAK)
+                #VOLVER A ELIMINAR ASIGNATURAS
                 break
-                
+            #SI NO SE ENCUENTRA INSCRITA
+            else:
+                print("La asignatura no se encuentra inscrita, favor intentarlo de nuevo")
 
     #SI NO HAY ASIGNATURAS INSCRITAS
     else:
@@ -178,6 +192,7 @@ def eliminar_alumno(alumnos):
                 return
             #validamos rut
             if ut.es_rut_valido(rut): #SI SE INGRESA UN RUT VALIDO
+                rut = ut.formato_rut(rut)
                 #VER SI SE ENCUENTRA EN LA LISTA DE ALUMNOS
                 if ut.se_encuentra_en_lista(rut, alumnos):
                     rut_alumno_actual = ut.formato_rut(rut)
@@ -187,8 +202,9 @@ def eliminar_alumno(alumnos):
                     print(f"Se va a eliminar el alumno {alumno_actual["nombre"]}")
                     #SI SE QUIERE ELIMINAR
                     if ut.confirmar():
+                        index_eliminar = ut.buscar_index_alumno(alumnos, rut)
                         #SE ELIMINA EL ALUMNO DE LA LISTA
-                        alumnos.pop(alumno_actual)
+                        alumnos.pop(index_eliminar)
                         #MENSAJE AL USUARIO - ALUMNO ELIMINADO
                         print("El alumno ha sido eliminado")
                         ut.pausar()

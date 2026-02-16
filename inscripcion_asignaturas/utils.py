@@ -101,6 +101,22 @@ def se_encuentra_en_lista(rut, lista): #RECIBE EL RUT Y LA LISTA DE ALUMNOS
     #SI TERMINA LA LISTA SIN ENCONTRAR UNA COINCIDENCIA
     return False
 
+def buscar_index(codigo, lista):
+    i = 0
+    for asignatura in lista:
+        if codigo == asignatura["codigo"]:
+            return i
+        else:
+            i += 1
+
+def buscar_index_alumno(alumnos, rut):
+    i = 0
+    for alumno in alumnos:
+        if rut == alumno["rut"]:
+            return i
+        else:
+            i += 1
+
 def confirmar():
     while True: 
         respuesta = input("¿Confirma su selección? S/N: ").upper()
@@ -141,7 +157,6 @@ def mostrar_asignaturas(nivel_alumno, asignaturas): #RECIBE EL NIVEL Y LA LISTA 
 
 def se_encuentra_asignatura(codigo_ingresado, asignaturas, nivel_alumno): #RECIBE EL CODIGO DE ASIGNATURA. LISTA ASIGNATURAS Y RETORNA TRUE O FALSE
     for codigo, asignatura in asignaturas.items():
-        
         if int(nivel_alumno) >= int(asignatura["nivel"]): 
             #SI SE ENCUENTRA LA ASIGNATURA
             if codigo_ingresado.upper() == codigo:
@@ -149,7 +164,6 @@ def se_encuentra_asignatura(codigo_ingresado, asignaturas, nivel_alumno): #RECIB
         #SI NO SE ENCUENTRA
         else:
             return False
-    pass
 
 def buscar_alumno(rut_alumno, lista_alumnos): #RECIBE EL RUT DEL ALUMNO, LA LISTA DE ALUMNOS Y DICCIONARIO ALUMNO
     for alumno in lista_alumnos:
