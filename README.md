@@ -24,14 +24,3 @@ Este proyecto permite registrar alumnos, validar sus datos (RUT) y gestionar la 
 
 Este proyecto utiliza la estructura `match-case`, por lo que **necesitas Python 3.10 o superior**.
 
-
-##  Estructura del Proyecto
-
-
-├── main.py                     # Archivo principal (Menú General)
-├── README.md                   
-│
-└── inscripcion_asignaturas/    # Paquete principal
-    ├── data.py                 # "Base de datos" simulada (Listas y Diccionarios)
-    ├── funciones.py            # Lógica de ins (Inscribir, Eliminar, Menús)
-    └── utils.py                # Herramientas reutilizables (Validar RUT, limpiar pantalla)
